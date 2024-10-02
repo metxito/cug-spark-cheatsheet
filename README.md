@@ -4,5 +4,11 @@ by Cristian Urbina
 
 ## Content:
 
-- [Creating DataFrames](creating-dataframes.md)
-- [Working with partitions](working-partitions.md)
+### Dataframes
+
+- [Creating DataFrames](dataframes-creation.md)
+
+### Tables
+
+- [Creating Delta Tables](delta-tables-creation.md)
+- [Working with partitions](delta-tables-partitions.md)
