@@ -1,4 +1,12 @@
-# Working with Partitions
+# Adding and Deleting Partitions in Delta Lake tables
+
+[Main Menu](../index.md)
+
+This post shows you how to add and delete partitions in Delta tables. You’ll learn why Delta Lake does not have ADD PARTITION and DROP PARTITION commands as Hive does and how Delta Lake treats Hive-style partitions differently.
+
+Let’s start by creating a partitioned Delta table and then see how to add and remove partitions
+
+Based on [Post](https://delta.io/blog/2023-01-18-add-remove-partition-delta-lake/)
 
 ## Create a table with partitions
 
@@ -14,7 +22,7 @@ df = spark.createDataFrame(
 ).toDF("first_name", "last_name", "country")
 
 # Write the DataFrame out to a Delta table called country_people
-df.repartition(F.col("country")) \
+df.repartition("country") \
     .write \
     .partitionBy("country") \
     .format("delta") \
@@ -22,7 +30,8 @@ df.repartition(F.col("country")) \
 ```
 
 Here are the contents of the Delta table:
-```
+
+```text
 spark-warehouse/country_people
 ├── _delta_log
 │   └── 00000000000000000000.json
@@ -46,7 +55,7 @@ df = spark.createDataFrame(
 ).toDF("first_name", "last_name", "country")
 
 # Append this DataFrame to the partitioned Delta table:
-df.repartition(F.col("country")) \
+df.repartition("country") \
     .write.mode("append") \
     .partitionBy("country") \
     .format("delta") \
@@ -54,7 +63,8 @@ df.repartition(F.col("country")) \
 ```
 
 Here are the contents of the Delta table:
-```
+
+```text
 spark-warehouse/country_people
 ├── _delta_log
 │   ├── 00000000000000000000.json
@@ -77,7 +87,7 @@ dt = delta.DeltaTable.forName(spark, "country_people")
 dt.delete(F.col("country") == "Argentina")
 ```
 
-You need to run vacuum twice to completely remove the Argentina partition. The first vacuum run deletes the files with Argentina data, and the Argentina directory becomes empty. The second vacuum run deletes the empty Argentina directory. You don’t normally have to run vacuum twice for all changes to take effect, but this is a special edge case. See this [Blog Spot](https://delta.io/blog/2023-01-03-delta-lake-vacuum-command/) to learn more about the vacuum command.
+You need to run vacuum twice to completely remove the Argentina partition. The first vacuum run deletes the files with Argentina data, and the Argentina directory becomes empty. The second vacuum run deletes the empty Argentina directory. You don’t normally have to run vacuum twice for all changes to take effect, but this is a special edge case. See this [Blog Post](https://delta.io/blog/2023-01-03-delta-lake-vacuum-command/) to learn more about the vacuum command.
 
 ```Python
 spark.conf.set("spark.databricks.delta.retentionDurationCheck.enabled", "false")
@@ -87,7 +97,8 @@ spark.sql("VACUUM country_people RETAIN 0 HOURS")
 ```
 
 Here is the contents of the filesystem and make sure that the Argentina partition was removed.
-```
+
+```text
 spark-warehouse/country_people
 ├── _delta_log
 │   ├── 00000000000000000000.json

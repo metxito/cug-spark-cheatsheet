@@ -1,6 +1,18 @@
-# Create a delta table
+# Manage delta tables
 
-## With SQL
+[Main Menu](../index.md)
+
+## Check is delta table exists
+
+```Python
+dfviews = spark.sql("SHOW TABLES")
+dfviews = dfviews.where(dfviews["tableName"] == "MyTable")
+dfviews.show()
+```
+
+## Create a delta table
+
+### With SQL
 
 ```SQL
 CREATE TABLE IF NOT EXISTS Lakehouse.table_name (
@@ -13,7 +25,7 @@ USING DELTA
 PARTITIONED BY (mydate)
 ```
 
-## With Spark
+### With Spark
 
 ```Python
 df = spark.createDataFrame(
