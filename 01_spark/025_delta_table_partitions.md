@@ -1,6 +1,6 @@
 # Adding and Deleting Partitions in Delta Lake tables
 
-[Main Menu](../index.md)
+[Main Menu](../README.md)
 
 This post shows you how to add and delete partitions in Delta tables. You’ll learn why Delta Lake does not have ADD PARTITION and DROP PARTITION commands as Hive does and how Delta Lake treats Hive-style partitions differently.
 

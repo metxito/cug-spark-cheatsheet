@@ -1,6 +1,6 @@
 # Create external tables
 
-[Main Menu](../index.md)
+[Main Menu](../README.md)
 
 ## External table without partitions
 
