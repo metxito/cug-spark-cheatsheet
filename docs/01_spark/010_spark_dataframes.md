@@ -1,6 +1,6 @@
 # Work with Spark DataFrames
 
-[Main Menu](../README.md)
+[Main Menu](../index.md)
 
 ## Queries
 

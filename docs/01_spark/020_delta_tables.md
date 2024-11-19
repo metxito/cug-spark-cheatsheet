@@ -1,6 +1,6 @@
 # Manage delta tables
 
-[Main Menu](../README.md)
+[Main Menu](../index.md)
 
 ## Check is delta table exists
 

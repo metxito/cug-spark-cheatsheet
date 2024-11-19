@@ -1,6 +1,6 @@
 # Python One-Liners That Will Boost Your Data Science Workflow
 
-[Main Menu](../README.md)
+[Main Menu](../index.md)
 
 Python is the most popular data science programming language, as it’s versatile and has a lot of support from the community. With so much usage, there are many ways to improve our data science workflow that you might not know.
 
